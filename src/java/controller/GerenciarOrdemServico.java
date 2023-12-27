@@ -19,12 +19,13 @@ import model.Lente;
 import model.Laboratorio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import model.Perfil;
-
+import model.Perfil; 
 
 @WebServlet(name = "GerenciarOrdemServico", urlPatterns = {"/gerenciarOrdemServico"})
 public class GerenciarOrdemServico extends HttpServlet {
+    
     RequestDispatcher dispatcher = null;
     OrdemServico os = null; 
     OrdemServicoDAO osdao = null;
@@ -37,41 +38,36 @@ public class GerenciarOrdemServico extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
+        
         String acao = request.getParameter("acao");
         String idOrdemServico = request.getParameter("idOrdemServico");
         String status = request.getParameter("status");
-        String message = "";
+        String dataEntrega = request.getParameter("dataEntrega");
+        String message = "";        
         
         os = new OrdemServico();
         osdao = new OrdemServicoDAO();
         
         try {
-            if(acao.equals("listar")){
-                if(GerenciarLogin.verificarPermissao(request, response)){
-                    ArrayList<OrdemServico> ordemServicos = new ArrayList<>();
-                    ordemServicos = osdao.getListarOrdemServico();
-                    dispatcher = getServletContext().getRequestDispatcher("/listarOrdemServicos.jsp");
-                    request.setAttribute("ordemServicos", ordemServicos);
-                    dispatcher.forward(request, response);
+            if(acao.equals("listar")){               
+                ArrayList<OrdemServico> ordemServicos = new ArrayList<>();
+                ordemServicos = osdao.getListarOrdemServico();
+                dispatcher = getServletContext().getRequestDispatcher("/listarOrdemServicos.jsp");
+                request.setAttribute("ordemServicos", ordemServicos);
+                dispatcher.forward(request, response);
+             
+            }else if(acao.equals("atualizarEntrega")){  
+                if(osdao.atualizarEntrga(Integer.parseInt(idOrdemServico))){
+                    message = "Entrega cofirmada!";                      
                 }else{
-                    message = "Usuário não autorizado";
-                }
-                   
-            }else if(acao.equals("atualizar")){  
-                if(GerenciarLogin.verificarPermissao(request, response)){
-                    if(osdao.atualizarEntrga(Integer.parseInt(idOrdemServico))){
-                        message = "Entrega cofirmada!";
-                    }else{
-                        message = "Falha ao atualizar o status da entrega!";
-                    }
-                }else{
-                    message = "Usuário não autorizado";
-                }                               
-            }
+                    message = "Falha ao atualizar o status da entrega!";
+                }                                  
+            }                  
+                        
         } catch (SQLException erro) {
             message = "Erro!: "+erro.getMessage();
             erro.printStackTrace();
@@ -98,7 +94,8 @@ public class GerenciarOrdemServico extends HttpServlet {
         
         String  idOrdemServico = request.getParameter("idOrdemServico");
         String  dataSolicitacao = request.getParameter("dataSolicitacao");
-        String  dataVencimento = request.getParameter("dataVencimento");      
+        String  dataVencimento = request.getParameter("dataVencimento"); 
+        String  dataEntrega = request.getParameter("dataEntrega"); 
         String  status = request.getParameter("status");
         String  idUsuario = request.getParameter("idUsuario");
         String  idCliente = request.getParameter("idCliente");
@@ -178,7 +175,7 @@ public class GerenciarOrdemServico extends HttpServlet {
             lab.setIdLaboratorio(Integer.parseInt(idLaboratorio));
             os.setLaboratorio(lab);
         }
-        
+                
         try {
             if(osdao.registrarOrdemServico(os)){
                 message = "Ordem de serviço foi registrada com sucesso!";
@@ -188,15 +185,13 @@ public class GerenciarOrdemServico extends HttpServlet {
         } catch (SQLException erro) {
             message = "Erro:"+ erro.getMessage();
             erro.printStackTrace();
-        }
-        
+        }        
         
         out.println(
                 "<script type='text/javascript'>"+
                     "alert('" + message + "');"+
                     "location.href='gerenciarOrdemServico?acao=listar';"+
-                "</script>");
-        
+                "</script>");    
         
     }
     

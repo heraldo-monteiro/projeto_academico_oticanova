@@ -163,7 +163,7 @@ public class GerenciarLogin extends HttpServlet {
                 
                 usuario = (Usuario)request.getSession().getAttribute("ulogado");
                 if(usuario == null){
-                    sessao.setAttribute("msg", "Usuário não altentivcado no sistema");
+                    sessao.setAttribute("msg", "Usuário não altenticado no sistema");
                     response.sendRedirect("login.jsp");
                 }else{
                     for(Menu m: usuario.getPerfil().getMenus()){

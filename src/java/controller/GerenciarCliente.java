@@ -176,7 +176,7 @@ public class GerenciarCliente extends HttpServlet {
         }        
                 
         Calendar dataNascimento = Calendar.getInstance();
-        dataNascimento.setTime(cliente.getDataNasc());
+        dataNascimento.setTime(cliente.getDataNasc());        
         int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
         int diaNasc = dataNascimento.get(Calendar.DAY_OF_MONTH);
         int mesNasc = dataNascimento.get(Calendar.MONTH);

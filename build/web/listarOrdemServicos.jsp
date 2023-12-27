@@ -62,23 +62,33 @@
                                     <td> ${os.usuario.nome}</td>
                                     <td> ${os.cliente.nome}</td>
                                     <td> ${os.lente.nome}</td>
-                                    <td> ${os.laboratorio.nome}</td>                            
+                                    <td> ${os.laboratorio.nome}</td>      
+                                    
                                     <td> 
                                         <fmt:formatDate pattern="dd/MM/yyyy"
                                             value="${os.dataSolicitacao}"/>
-                                    </td> 
-                                    <td> 
-                                    <fmt:formatDate pattern="dd/MM/yyyy"
-                                            value="${os.dataVencimento}"/>
-                                    </td>                                
+                                    </td>  
+                                    
                                     <td> 
                                         <fmt:formatDate pattern="dd/MM/yyyy"
-                                            value="${os.dataEntrega}"/>
-                                    </td>                                    
+                                            value="${os.dataVencimento}"/>
+                                    </td>   
+                                    
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${empty os.dataEntrega}">
+                                                Sem entrada
+                                            </c:when>
+                                            <c:otherwise>
+                                                <fmt:formatDate pattern="dd/MM/yyyy" value="${os.dataEntrega}"></fmt:formatDate>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>  
+                                    
                                     <td>                                
                                          <c:choose>
                                             <c:when test="${os.dataEntrega == null}">
-                                                <a href="gerenciarOrdemServico?acao=atualizar&idOrdemServico=${os.idOrdemServico}"
+                                                <a href="gerenciarOrdemServico?acao=atualizarEntrega&idOrdemServico=${os.idOrdemServico}"                                             
                                                 class="btn btn-warning btn-sm"
                                                 role="button"> Confirmar</a>  
                                             </c:when>
