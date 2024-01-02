@@ -88,16 +88,16 @@
                                     <td>                                
                                          <c:choose>
                                             <c:when test="${os.dataEntrega == null}">
-                                                <a href="gerenciarOrdemServico?acao=atualizarEntrega&idOrdemServico=${os.idOrdemServico}"                                             
-                                                class="btn btn-warning btn-sm"
+                                                <a href="gerenciarOrdemServico?acao=atualizarEntrega&idOrdemServico=${os.idOrdemServico}" href="gerenciarOrdemServico?acao=listar"                                                    
+                                                class="btn btn-warning btn-sm"                                               
                                                 role="button"> Confirmar</a>  
-                                            </c:when>
+                                            </c:when>                                      
                                             <c:otherwise>  
                                                 <button class="btn btn-success"> 
                                                     Recebido
                                                 </button>
-                                            </c:otherwise>
-                                        </c:choose>                               
+                                            </c:otherwise>                                            
+                                        </c:choose>                                     
                                     </td>                                  
                                  
                                 </tr>

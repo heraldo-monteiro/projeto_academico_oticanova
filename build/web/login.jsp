@@ -1,76 +1,67 @@
 <%-- 
-    Document   : Login
-    Created on : 10 de out. de 2023, 19:43:42
+    Document   : login_page
+    Created on : 31 de dez. de 2023, 14:28:56
     Author     : Heraldo
 --%>
 
-<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">   
-        <meta http-equiv="X-UA-Compatible" content="IE-edge, chrome=1">  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, user-scale=no, shrink-to-fit=no">
-        <link rel="stylesheet" href="bootstrap/bootstrap.min.css" type="text/css">    
-        <link rel="stylesheet" href="css/menu.css" type="text/css">  
-        <link rel="stylesheet" href="css/styles.css" type="text/css">    
-        <link rel="stylesheet" href="css/login.css" type="text/css">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="page_login/css/style.css" type="text/css">
         
-        <title>Sistema Interno</title>
+        <title>Otica Nova Login </title>
     </head>
-    <body>  
-        <div id="container">
-            <div id="header"> 
-                <jsp:include page="template/banner.jsp"></jsp:include>  
+    <body>
+        <main id="container">
+            <form id="login_form" action="gerenciarLogin" method="POST">
+                <div id="form_header">
+                    <h1>Login</h1>
+                    <i id="mode_icon" class="fa-solid fa-moon"></i>
+                </div>
 
-            </div><!-- fim da div HEADER-->   
-            <div id="menu"> 
-          
-            </div><!-- fim da div MENU-->   
-            <div id"conteudo" class="bg-background">  
-                <div class=" container">     
-                    
-                <jsp:include page="scripts/alert_edit_request.jsp"></jsp:include>
-                    <fieldset class="mt-5">
-                        
-                        <form action="gerenciarLogin" method="POST">
-                            <h3 class="text-center mt-5"> Página de Login</h3>
-                            
-                            <div class="form-group row offset-md-2 mt-5">
-                                <label class="col-md-2">Usuário</label>                                          
-                                <div class="col-md-4">    
-                                    <input type="text" 
-                                           name="login"
-                                           value=""
-                                           class="form-control">
-                                </div>
-                            </div> 
+                <div id="social_midia">
+                    <a href="#"> <img src="page_login/imgs/facebook.png" alt="facebook-logo"></a>
+                    <a href="#"> <img src="page_login/imgs/github.png" alt="github-logo"></a>
+                    <a href="#"> <img src="page_login/imgs/google.png" alt="google-logo"></a>
+                </div>
 
-                            <div class="form-group row offset-md-2 mt-2">  
-                                <label class="col-md-2"> Senha</label>   
-                                <div class="col-md-4">
-                                    <input type="password" 
-                                           name="senha"
-                                           value=""
-                                           class="form-control">
-                                </div>
-                            </div> 
-                                <div class="d-md-flex justify-content-md-end mt-3">                                        
-                                    <button class="btn btn-primary btn-md"> Logar</button>                                                         
-                                </div>                             
-                        </form>
-                        
-                    </fieldset>
-                </div> <!-- fim da div Class CONTAINER-->   
-            </div><!-- Fim da div Id CONTEUDO-->             
-        </div><!-- Fim da div Id CONTAINER-->   
+                <div id="input">
+                    <div class="input-box">
+                        <label for="name"> Usuário
+                            <div class="input-field">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" 
+                                       id="name" 
+                                       name="login">
+                            </div>
+                        </label>
+                    </div>
 
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="bootstrap/bootstrap.min.js"></script>  
-        
+                    <div class="input-box">
+                        <label for="password"> Password
+                            <div class="input-field">
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" 
+                                       id="password" 
+                                       name="senha"
+                                       value="">
+                            </div>
+                        </label>
+                        <div id="forgot_password">
+                            <a href="#">Forgot yours password?</a>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="login-button">
+                    Login
+                </button>
+            </form>   
+            <script type="text/javascript" src="page_login/js/script.js"></script>  
+
+        </main>  
     </body>
 </html>
